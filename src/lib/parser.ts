@@ -69,7 +69,7 @@ async function extractPdfText(uint8: Uint8Array): Promise<string> {
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
       const pageText = textContent.items
-        .map((item: any) => item.str)
+        .map((item: unknown) => (item && typeof item === 'object' && 'str' in item ? String((item as { str: unknown }).str) : ''))
         .join(' ');
       pagesText.push(pageText);
     }
@@ -182,6 +182,31 @@ function cosine(a: Map<string, number>, b: Map<string, number>): number {
   return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
+export interface SimilarityMatchResult {
+  source_url: string;
+  source_title: string;
+  matched_text_snippet: string;
+  lexical_score: number;
+  semantic_score: number;
+  overall_similarity_percentage: number;
+}
+
+export interface AnalysisOutput {
+  raw: string;
+  similarity: SimilarityMatchResult[];
+  ai: {
+    ai_likelihood_percentage: number;
+    confidence: string;
+    indicators: string[];
+    suspicious_passages: string[];
+  };
+  citations: {
+    inTextCount: number;
+    hasBibliography: boolean;
+    detectedList: string[];
+  };
+}
+
 export class SimilarityEngine {
   lexical(text1: string, text2: string): number {
     return jaccard(ngrams(text1, 4), ngrams(text2, 4));
@@ -192,9 +217,9 @@ export class SimilarityEngine {
   /**
    * Compare a document against the mock sources and return the best matches.
    */
-  analyze(document: string) {
+  analyze(document: string): SimilarityMatchResult[] {
     if (!document || document.trim().length < 10) return [];
-    const results: any[] = [];
+    const results: SimilarityMatchResult[] = [];
     for (const source of mockData) {
       const lex = this.lexical(document, source.text);
       const sem = this.semantic(document, source.text);

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { analyzeDocument } from '../lib/parser';
+import { analyzeDocument, type AnalysisOutput, type SimilarityMatchResult } from '../lib/parser';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const [analysisResult, setAnalysisResult] = useState<any>(null);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisOutput | null>(null);
   const [activeTab, setActiveTab] = useState<'ai' | 'similarity' | 'citations' | 'text'>('ai');
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   // Determine peak similarity percentage from sources
-  const getPeakSimilarity = (similarityList: any[]) => {
+  const getPeakSimilarity = (similarityList: SimilarityMatchResult[]) => {
     if (!similarityList || similarityList.length === 0) return 0;
     return Math.max(...similarityList.map(s => s.overall_similarity_percentage));
   };
@@ -222,7 +222,7 @@ export default function Home() {
                       <ul style={{ paddingLeft: '1.25rem', color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.6' }}>
                         {analysisResult.ai.suspicious_passages.map((p: string, idx: number) => (
                           <li key={idx} style={{ marginBottom: '0.5rem', fontStyle: 'italic' }}>
-                            "{p}"
+                            &ldquo;{p}&rdquo;
                           </li>
                         ))}
                       </ul>
@@ -240,7 +240,7 @@ export default function Home() {
                   {analysisResult.similarity.length === 0 ? (
                     <p style={{ color: '#64748b', fontStyle: 'italic' }}>No matches found against database sources.</p>
                   ) : (
-                    analysisResult.similarity.map((s: any, idx: number) => (
+                    analysisResult.similarity.map((s: SimilarityMatchResult, idx: number) => (
                       <div key={idx} className={styles.sourceItem}>
                         <div className={styles.sourceHeader}>
                           <div>
@@ -260,7 +260,7 @@ export default function Home() {
                           <span>Lexical match: {s.lexical_score}%</span>
                           <span>Semantic match: {s.semantic_score}%</span>
                         </div>
-                        <p className={styles.snippet}>"{s.matched_text_snippet}"</p>
+                        <p className={styles.snippet}>&ldquo;{s.matched_text_snippet}&rdquo;</p>
                       </div>
                     ))
                   )}
