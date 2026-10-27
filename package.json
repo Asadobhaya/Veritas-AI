@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node tests/parser.test.js",
-    "electron": "electron .",
+    "electron": "next build && electron .",
+    "electron:dev": "electron .",
     "electron:build": "next build && electron-builder"
   },
   "build": {

@@ -56,33 +56,39 @@ Veritas AI is a high-performance, fully offline desktop application designed to 
 - [Python 3.10+](https://www.python.org/) (for backend engine calibration)
 
 ### 1. Client Installation
-Clone the repository and install npm packages:
+Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/your-username/veritas-ai.git
-cd veritas-ai
+git clone https://github.com/Asadobhaya/Veritas-AI.git
+cd Veritas-AI
 npm install
 ```
 
-### 2. Configure Database/Redis Templates
-Copy the example environment file and configure local credentials:
+### 2. Configure Environment (Optional)
+If running docker/database containers:
 ```bash
 cp .env.example .env
 ```
+*(Note: Core analysis and the desktop application run 100% offline out-of-the-box without requiring database setup.)*
 
 ---
 
-## 💻 Development & Build Scripts
+## 💻 Development & Execution Scripts
 
-### Start Next.js Development Server
+### Option A: Start Web Version in Browser (Quickest)
 ```bash
 npm run dev
 ```
-The client dashboard will be available locally at `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
-### Launch Electron Desktop Environment (Local)
-To boot the desktop environment connected to Next's builder:
+### Option B: Launch Desktop Application (Electron)
 ```bash
 npm run electron
+```
+*(This automatically compiles Next.js static assets and launches the native desktop window.)*
+
+If you have already built the app and want to start Electron instantly:
+```bash
+npm run electron:dev
 ```
 
 ### Package Portable Installer (.EXE)
