@@ -1,0 +1,10 @@
+Academic integrity is the moral code or ethical policy of academia. This includes values such as avoidance of cheating or plagiarism; maintenance of academic standards; honesty and rigor in research and academic publishing. Machine learning models, particularly large language models, have shown significant capability in generating human-like text. However, they also pose challenges for academic integrity because students might use them to generate essays.
+
+According to Smith (2020), "the rise of artificial intelligence has fundamentally altered the landscape of higher education." This sentiment is echoed by Johnson et al. (2021), who argue that institutions must adapt their policies to address the new realities of AI-assisted writing.
+
+The quick brown fox jumps over the lazy dog. This is a generic sentence used to test font rendering and text processing pipelines.
+
+References
+
+Smith, J. (2020). AI and the Future of Education. Journal of Higher Education, 45(3), 112-128.
+Johnson, A., Williams, B., & Davis, C. (2021). Adapting Academic Integrity Policies for the AI Era. Educational Technology Review, 18(2), 45-67.
