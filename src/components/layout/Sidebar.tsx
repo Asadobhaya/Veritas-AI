@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, FolderOpen, PlusCircle, Settings,
   ShieldCheck, Zap, ChevronRight, LogOut, CreditCard,
-  BarChart2, Sparkles
+  Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mockUser } from "@/lib/mock-data";

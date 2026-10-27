@@ -15,12 +15,24 @@ const summaryStats = [
   { label: "Conversion Rate", value: "12.4%", change: "+2.1%", icon: TrendingUp, accent: "text-coral-400", bg: "bg-coral-500/10" },
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipPayloadItem {
+  name: string;
+  value: number | string;
+  color: string;
+}
+
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: TooltipPayloadItem[];
+  label?: string;
+}
+
+const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (!active || !payload) return null;
   return (
     <div className="bg-base-700 border border-white/10 rounded-xl p-3 text-sm shadow-xl">
       <p className="text-base-300 mb-1">{label}</p>
-      {payload.map((p: any) => (
+      {payload.map((p) => (
         <p key={p.name} style={{ color: p.color }} className="font-semibold">
           {p.name}: {p.name === "revenue" ? `$${p.value.toLocaleString()}` : p.value}
         </p>

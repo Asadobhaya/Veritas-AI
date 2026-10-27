@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getScoreColor, getScoreLabel, getScoreDashOffset } from "@/lib/utils";
+import { getScoreColor, getScoreLabel } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 interface ScoreRingProps {
